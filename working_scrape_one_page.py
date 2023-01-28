@@ -1,6 +1,5 @@
 import requests
-from time import *
-from random import randint
+import time
 from bs4 import BeautifulSoup as bs
 
 """
@@ -24,23 +23,6 @@ original_url = 'https://www.truecar.com/used-cars-for-sale/listings/honda/civic/
 response = requests.get(original_url)
 soup = bs(response.content,'html.parser')
 
-last_page = int(soup.find_all(attrs={"data-test": "paginationItem"})[-1].text)
-
-for page in range(1,last_page+1):
-    split_url = original_url.split("?")
-    new_url = split_url[0] + '?page=' + str(page) + '&' + split_url[1]
-    print('new url is : ' + new_url)
-    response = requests.get(new_url)
-    soup = bs(response.content,'html.parser')
-
-    
-    sleep(randint(1,5))
-
-
-
-response = requests.get(original_url)
-soup = bs(response.content,'html.parser')
-
 price_search_result=soup.find_all(attrs={"data-test": "vehicleCardPricingBlockPrice"})
 
 list_of_prices = []
@@ -50,12 +32,12 @@ for x in price_search_result:
     list_of_prices.append(price_float)
 list_of_prices.sort()
 sum = 0
-#print('Prices of certain cars in area:')
+print('Prices of certain cars in area:')
 for x in list_of_prices:
     sum+=x
-    #print(f'${x:.2f}')
+    print(f'${x:.2f}')
 average_price = sum/len(list_of_prices)
-#print(f'\nAverage of above prices is: ${average_price:.2f}.')
+print(f'\nAverage of above prices is: ${average_price:.2f}.')
 
 """
 sites to use:
