@@ -1,8 +1,10 @@
 import tweepy, keys
 from bs4 import BeautifulSoup as bs
+import scrape_truecar
 
 
-tweet_message = 'this is a test'
+price_rounded = round(scrape_truecar.average_price,2)
+tweet_message = 'The average is $' + str(price_rounded) + '.'
 
 def api():
     auth = tweepy.OAuth1UserHandler(

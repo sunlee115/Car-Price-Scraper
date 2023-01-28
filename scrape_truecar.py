@@ -13,12 +13,11 @@ then everyday it could tweet:
 'Today, the average cost of a HONDA S2000 in city,state is $1234.56
 Gathered from truecar, cargurus, etc'
 
-
 and the city and state could change everyday too for fun?
 """
 
 #url = 'https://www.truecar.com/used-cars-for-sale/listings/location-carrollton-tx/?searchRadius=25'
-test_url = 'https://www.truecar.com/used-cars-for-sale/listings/honda/s2000/location-carrollton-tx/?searchRadius=10'
+test_url = 'https://www.truecar.com/used-cars-for-sale/listings/honda/civic/location-carrollton-tx/?searchRadius=50&sort[]=price_asc'
 page = requests.get(test_url)
 soup = bs(page.content,'html.parser')
 
