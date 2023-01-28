@@ -1,17 +1,14 @@
 import requests
-import urllib.request
 import time
 from bs4 import BeautifulSoup as bs
-import numpy as np
-import pandas as pd
-from urllib.request import urlopen
 
-url = 'https://en.wikipedia.org/wiki/Twice'
+
+url = 'https://www.newegg.com/dji-mini-3-pro-263174/p/N82E16815515034?Description=dji%20drone&cm_re=dji_drone-_-15-515-034-_-Product&quicklink=true'
 page = requests.get(url)
 soup = bs(page.content,'html.parser')
-#find_all looks for tags (e.g. title, h2, p)
-headlines = soup.find(id="bodyContent").find_all("h2")
-for x in headlines:
-    headline = x.text.split("[edit]")[0]
-    print(headline)
+
+price_result = soup.find("li",class_="price-current")
+price = float(price_result.text.split("$")[1])
+#print (price)
+print(f'{price:.2f}')
 
