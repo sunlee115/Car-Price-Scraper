@@ -7,13 +7,8 @@ import pandas as pd
 from urllib.request import urlopen
 
 url = 'https://en.wikipedia.org/wiki/Epidemiology_of_depression'
-html = urlopen(url) 
-soup = bs(html, 'html.parser')
-
-
-"""
-for multiple pages, go to the bottom or whatever shows the last page #, 
-and scrape that value. change url and loop through prices until it reaches 
-that last value?
-"""
-
+page = requests.get(url)
+soup = bs(page.content,'html.parser')
+headlines = soup.find(id="bodyContent").find_all("h2")
+for head in headlines:
+    print (head.text)

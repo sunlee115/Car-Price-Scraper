@@ -12,6 +12,9 @@ soup = bs(html, 'html.parser')
 
 
 """
+sites to use:
+cargurus, cars.com, autotrader, trucar
+
 - only works for truecar, idk how to make the others work yet lols
 for multiple pages, go to the bottom or whatever shows the last page #, 
 and scrape that value. change url and loop through prices until it reaches 
