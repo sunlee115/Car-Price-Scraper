@@ -3,6 +3,7 @@ from time import *
 from random import randint
 from bs4 import BeautifulSoup as bs
 
+print("Welcome to Sun's Truecar scraper :)\n")
 make = input("What make? ")
 model = input("What model? ")
 
@@ -48,3 +49,5 @@ average_price = sum_price/len(all_prices)
 if(num_cars_total!=len(all_prices)):
     print(f"\n{len(all_prices)} out of {num_cars_total} {model}s have prices available.")
 print(f'\nAverage of {len(all_prices)} prices = ${average_price:.2f}.')
+print(f"\nHere's your Truecar search result link: {truecar_url}")
+print(f"\nHave a good day. Beep boop.\n")
