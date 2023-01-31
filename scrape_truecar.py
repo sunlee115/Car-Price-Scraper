@@ -7,8 +7,8 @@ print("Welcome to Sun's Truecar scraper :)\n")
 make = input("What make? ")
 model = input("What model? ")
 
-truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/' + make.lower().strip() + '/' + model.lower().strip() + '/location-carrollton-tx/?searchRadius=5000&sort[]=price_asc'
-#truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/honda/s2000/location-carrollton-tx/?searchRadius=5000&sort[]=price_asc'
+truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/' + make.lower().strip() + '/' + model.lower().strip() + '/location-/?searchRadius=5000&sort[]=price_asc'
+#truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/honda/s2000/location-/?searchRadius=5000&sort[]=price_asc'
 
 response = requests.get(truecar_url)
 soup = bs(response.content,'html.parser')
