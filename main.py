@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 import scrape_truecar
 
 price_rounded = round(scrape_truecar.average_price,2)
-tweet_message = 'BEEP BOOP - The average price of a used ' + scrape_truecar.make + ' ' + scrape_truecar.model + ' is $' + str(price_rounded) + '.'
+tweet_message = 'BEEP BOOP - The average price of a used ' + scrape_truecar.make + ' ' + scrape_truecar.model + ' is $' + str(price_rounded)
 
 def api():
     auth = tweepy.OAuth1UserHandler(
