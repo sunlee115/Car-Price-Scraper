@@ -26,3 +26,19 @@ def tweet(api: tweepy.API, message:str, image_path=None):
 if __name__ == '__main__':
     api=api()
     tweet(api, tweet_message)
+    
+
+"""
+cargurus, cars.com, autotrader, trucar
+what if the twitter bot everyday just tweeted the average price of a random car??
+honda = [s2000, civic, odyssey]
+bmw = [3-series, x5]
+etc...
+
+then everyday it could tweet:
+
+'Today, the average cost of a HONDA S2000 in city,state is $1234.56
+Gathered from truecar, cargurus, etc'
+
+and the city and state could change everyday too for fun?
+"""
