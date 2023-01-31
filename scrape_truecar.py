@@ -1,5 +1,7 @@
 import requests
-from time import *
+import lxml
+import cchardet
+from time import sleep,time
 from random import randint
 from bs4 import BeautifulSoup as bs
 
@@ -26,7 +28,7 @@ sum_price = 0
 average_price=0
 all_prices = []
 
-
+start_time=time()
 for page in range(1,last_page+1):
     print(f'Scraping page {page}...')
     new_url = truecar_url.split("?")[0] + '?page=' + str(page) + '&' + truecar_url.split("?")[1]
@@ -37,9 +39,7 @@ for page in range(1,last_page+1):
         price_float = float(x.text.replace("$","").replace(",",""))
         all_prices.append(price_float)
            
-    sleep(randint(1,5))
-    print(f'Finished page {page}!\n')  
-    sleep(1)
+    #sleep(randint(1,5))
 
 all_prices.sort()
 for x in all_prices:
@@ -51,3 +51,4 @@ if(num_cars_total!=len(all_prices)):
 print(f'\nAverage of {len(all_prices)} prices = ${average_price:.2f}.')
 print(f"\nHere's your Truecar search result link: {truecar_url}")
 print(f"\nHave a good day. Beep boop.\n")
+print(f"\nElapsed time is {time()-start_time}")
