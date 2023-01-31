@@ -3,21 +3,28 @@ from time import *
 from random import randint
 from bs4 import BeautifulSoup as bs
 
-make = input("What make? ").lower().strip()
-model = input("What model? ").lower().strip()
+make = input("What make? ")
+model = input("What model? ")
 
-truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/' + make + '/' + model + '/location-carrollton-tx/?searchRadius=5000&sort[]=price_asc'
-
+truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/' + make.lower().strip() + '/' + model.lower().strip() + '/location-carrollton-tx/?searchRadius=5000&sort[]=price_asc'
 #truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/honda/s2000/location-carrollton-tx/?searchRadius=5000&sort[]=price_asc'
 
 response = requests.get(truecar_url)
 soup = bs(response.content,'html.parser')
-last_page = int(soup.find_all(attrs={"data-test": "paginationItem"})[-1].text)
-count_cars = 0
+num_cars_response = soup.find_all(attrs={"data-test": "bodyCopy"})[-1].text
+num_cars_total = int(num_cars_response.split("TrueCar has ")[1].split(" used")[0])
+try:
+    last_page = int(soup.find_all(attrs={"data-test": "paginationItem"})[-1].text)
+except:
+    last_page=1
+if(last_page==1):
+    print(f"\n{num_cars_total} {model}s found! That's only {last_page} page to scrape :D\n")
+else:
+    print(f"\n{num_cars_total} {model}s found! That's {last_page} pages to scrape .-.\n")
 sum_price = 0
 average_price=0
 all_prices = []
-print(f'\n{last_page} pages to scrape .-.\n')
+
 
 for page in range(1,last_page+1):
     print(f'Scraping page {page}...')
@@ -34,9 +41,10 @@ for page in range(1,last_page+1):
     sleep(1)
 
 all_prices.sort()
-print(f'Prices of {len(all_prices)} cars in area:')
 for x in all_prices:
     sum_price+=x
     print(f'${x:.2f}')
 average_price = sum_price/len(all_prices)
-print(f'\nAverage of above prices is: ${average_price:.2f}.')
+if(num_cars_total!=len(all_prices)):
+    print(f"\n{len(all_prices)} out of {num_cars_total} {model}s have prices available.")
+print(f'\nAverage of {len(all_prices)} prices = ${average_price:.2f}.')
