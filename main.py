@@ -23,6 +23,9 @@ if __name__ == '__main__':
     tweet(api, tweet_message)
     
 
+
+#make it tweet a photo of the car too???
+
 """
 cargurus, cars.com, autotrader, trucar
 what if the twitter bot everyday just tweeted the average price of a random car??

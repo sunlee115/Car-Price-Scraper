@@ -8,15 +8,12 @@ from bs4 import BeautifulSoup as bs
 print("Welcome to Sun's Truecar scraper :)\n")
 make = input("What make? ")
 model = input("What model? ")
-years = input("What years? ")
-#need to add years
-#
+years = input("What years? (YYYY-YYYY or MIN-MAX) ")
 
-truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/' + make.lower().strip() + '/' + model.lower().strip() + '/location-/?searchRadius=5000&sort[]=price_asc'
-#truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/honda/s2000/location-/?searchRadius=5000&sort[]=price_asc'
+truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/' + make.lower().strip() + '/' + model.lower().strip() + '/year-' + years.strip() +'/?sort[]=price_asc'
 requests_session = requests.Session()
 response = requests_session.get(truecar_url)
-soup = bs(response.content,'html.parser')
+soup = bs(response.content,'lxml')
 num_cars_response = soup.find_all(attrs={"data-test": "bodyCopy"})[-1].text
 num_cars_total = int(num_cars_response.split("TrueCar has ")[1].split(" used")[0].replace(",",""))
 try:
@@ -36,7 +33,7 @@ for page in range(1,last_page+1):
     print(f'Scraping page {page}...')
     new_url = truecar_url.split("?")[0] + '?page=' + str(page) + '&' + truecar_url.split("?")[1]
     response = requests_session.get(new_url)
-    soup = bs(response.content,'html.parser')
+    soup = bs(response.content,'lxml')
     prices_response=soup.find_all(attrs={"data-test": "vehicleCardPricingBlockPrice"})
     for x in prices_response:
         price_float = float(x.text.replace("$","").replace(",",""))
