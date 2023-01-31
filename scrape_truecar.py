@@ -13,7 +13,7 @@ truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/' + make.lowe
 #truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/honda/s2000/location-/?searchRadius=5000&sort[]=price_asc'
 
 response = requests.get(truecar_url)
-soup = bs(response.content,'lxml')
+soup = bs(response.content,'html.parser')
 num_cars_response = soup.find_all(attrs={"data-test": "bodyCopy"})[-1].text
 num_cars_total = int(num_cars_response.split("TrueCar has ")[1].split(" used")[0])
 try:
