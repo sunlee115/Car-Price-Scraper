@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup as bs
 print("Welcome to Sun's Truecar scraper :)\n")
 make = input("What make? ")
 model = input("What model? ")
+years = input("What years? ")
 #need to add years
 #
 
