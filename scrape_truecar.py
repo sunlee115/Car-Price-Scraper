@@ -10,7 +10,7 @@ make = input("What make? ")
 model = input("What model? ")
 years = input("What years? (YYYY-YYYY or MIN-MAX) ")
 
-truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/' + make.lower().strip() + '/' + model.lower().strip() + '/year-' + years.strip() +'/?sort[]=price_asc'
+truecar_url = 'https://www.truecar.com/used-cars-for-sale/listings/' + make.lower().strip() + '/' + model.lower().strip() + '/year-' + years.strip() +'/?searchRadius=5000&sort[]=price_asc'
 requests_session = requests.Session()
 response = requests_session.get(truecar_url)
 soup = bs(response.content,'lxml')
@@ -38,8 +38,6 @@ for page in range(1,last_page+1):
     for x in prices_response:
         price_float = float(x.text.replace("$","").replace(",",""))
         all_prices.append(price_float)
-           
-    #sleep(randint(1,5))
 
 all_prices.sort()
 for x in all_prices:
